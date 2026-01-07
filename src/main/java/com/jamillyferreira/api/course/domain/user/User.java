@@ -1,5 +1,6 @@
 package com.jamillyferreira.api.course.domain.user;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
