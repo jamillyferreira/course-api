@@ -1,6 +1,5 @@
 package com.jamillyferreira.api.course.domain.user;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jamillyferreira.api.course.domain.order.Order;
 import jakarta.persistence.*;
@@ -9,7 +8,6 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 
 @Entity
 @Table(name = "tb_user")
