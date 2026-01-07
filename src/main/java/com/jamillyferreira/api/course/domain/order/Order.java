@@ -22,6 +22,10 @@ public class Order {
     private Long id;
     private Instant moment;
 
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private OrderStatus orderStatus;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
