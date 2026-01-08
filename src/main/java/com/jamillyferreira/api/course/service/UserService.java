@@ -1,6 +1,6 @@
 package com.jamillyferreira.api.course.service;
 
-import com.jamillyferreira.api.course.domain.user.User;
+import com.jamillyferreira.api.course.domain.User;
 import com.jamillyferreira.api.course.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

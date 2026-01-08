@@ -1,6 +1,6 @@
-package com.jamillyferreira.api.course.domain.order;
+package com.jamillyferreira.api.course.domain;
 
-import com.jamillyferreira.api.course.domain.user.User;
+import com.jamillyferreira.api.course.domain.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

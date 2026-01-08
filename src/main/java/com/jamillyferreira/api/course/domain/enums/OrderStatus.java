@@ -1,4 +1,4 @@
-package com.jamillyferreira.api.course.domain.order;
+package com.jamillyferreira.api.course.domain.enums;
 
 public enum OrderStatus {
     WAITING_PAYMENT("Aguardando pagamento"),

@@ -1,6 +1,6 @@
 package com.jamillyferreira.api.course.controller;
 
-import com.jamillyferreira.api.course.domain.order.Order;
+import com.jamillyferreira.api.course.domain.Order;
 import com.jamillyferreira.api.course.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

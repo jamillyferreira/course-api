@@ -1,6 +1,6 @@
 package com.jamillyferreira.api.course.controller;
 
-import com.jamillyferreira.api.course.domain.user.User;
+import com.jamillyferreira.api.course.domain.User;
 import com.jamillyferreira.api.course.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

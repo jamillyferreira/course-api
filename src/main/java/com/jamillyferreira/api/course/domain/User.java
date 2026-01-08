@@ -1,7 +1,6 @@
-package com.jamillyferreira.api.course.domain.user;
+package com.jamillyferreira.api.course.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.jamillyferreira.api.course.domain.order.Order;
 import jakarta.persistence.*;
 import lombok.*;
 
