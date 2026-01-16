@@ -15,11 +15,11 @@ import java.util.Objects;
 @Getter
 @Setter
 public class OrderItemPK implements Serializable {
-    @ManyToOne
+    @ManyToOne // MUITAS OrderItemPK podem referenciar o MESMO Order
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @ManyToOne
+    @ManyToOne // MUITAS OrderItemPK podem referenciar o MESMO Product
     @JoinColumn(name = "product_id")
     private Product product;
 

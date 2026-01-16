@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -26,12 +28,22 @@ public class Order {
     @Column(length = 20)
     private OrderStatus orderStatus;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
+    @ManyToOne // MUITOS pedidos pertencem a UM cliente
+    @JoinColumn(name = "client_id") // coluna que guarda o ID do cliente
     private User client;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>(); // Uso SET para que nao permita duplicadas
 
     public Order(Instant moment, User client) {
         this.moment = moment;
+        this.client = client;
+    }
+
+    public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
+        this.id = id;
+        this.moment = moment;
+        this.orderStatus = orderStatus;
         this.client = client;
     }
 

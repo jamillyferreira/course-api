@@ -26,7 +26,7 @@ public class User {
 
     @JsonIgnore
     @Setter(AccessLevel.NONE)
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client") // UM usuario tem VARIOS pedidos
     private List<Order> orders = new ArrayList<>();
 
     public User(Long id, String name, String email, String phone, String password) {
