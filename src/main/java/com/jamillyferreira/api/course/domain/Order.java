@@ -35,6 +35,9 @@ public class Order {
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>(); // Uso SET para que nao permita duplicadas
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
+
     public Order(Instant moment, User client) {
         this.moment = moment;
         this.client = client;
@@ -45,6 +48,14 @@ public class Order {
         this.moment = moment;
         this.orderStatus = orderStatus;
         this.client = client;
+    }
+
+    public Double getTotal() {
+        double sum = 0.0;
+        for(OrderItem x : items) {
+            sum =+ x.getSubTotal();
+        }
+        return sum;
     }
 
     @Override

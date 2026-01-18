@@ -3,9 +3,12 @@ package com.jamillyferreira.api.course.controller;
 import com.jamillyferreira.api.course.domain.User;
 import com.jamillyferreira.api.course.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 
@@ -25,6 +28,23 @@ public class UserController {
     public ResponseEntity<User> findById(@PathVariable Long id) {
         User user = service.findById(id);
         return ResponseEntity.ok().body(user);
+    }
+
+    @PostMapping
+    public ResponseEntity<User> insert(@RequestBody User user) {
+        User savedUser = service.insert(user);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedUser.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(savedUser);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
