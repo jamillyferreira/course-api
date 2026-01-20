@@ -2,6 +2,7 @@ package com.jamillyferreira.api.course.service;
 
 import com.jamillyferreira.api.course.domain.User;
 import com.jamillyferreira.api.course.repository.UserRepository;
+import com.jamillyferreira.api.course.service.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class UserService {
 
     public User findById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado!"));
+                .orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User user) {
@@ -36,7 +37,8 @@ public class UserService {
     }
 
     public User update(Long id, User user) {
-        User entity = repository.getReferenceById(id);
+        User entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id));
         updateData(entity, user);
         return repository.save(entity);
     }
