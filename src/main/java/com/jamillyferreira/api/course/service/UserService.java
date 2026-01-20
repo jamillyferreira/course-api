@@ -2,8 +2,9 @@ package com.jamillyferreira.api.course.service;
 
 import com.jamillyferreira.api.course.domain.User;
 import com.jamillyferreira.api.course.repository.UserRepository;
+import com.jamillyferreira.api.course.service.exceptions.DatabaseException;
 import com.jamillyferreira.api.course.service.exceptions.ResourceNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,20 +28,33 @@ public class UserService {
     }
 
     public User insert(User user) {
-        user.setId(null);
-        return repository.save(user);
+        user.setId(null); // Verifica se ID esta vazio
+        try { // Se tiver vazio, tenta criar um user novo
+            return repository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Integrity violation");
+        }
     }
 
     public void delete(Long id) {
-        User user = findById(id);
-        repository.delete(user);
+        findById(id);
+        try {
+            repository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Integrity violation: Cannot delete user with associated records");
+
+        }
     }
 
     public User update(Long id, User user) {
-        User entity = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(id));
-        updateData(entity, user);
-        return repository.save(entity);
+        try {
+            User entity = repository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException(id));
+            updateData(entity, user);
+            return repository.save(entity);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Integrity violation");
+        }
     }
 
     private void updateData(User entity, User user) {
